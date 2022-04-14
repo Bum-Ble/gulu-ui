@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/Bum-Ble/gulu-ui/issues"
   },
-  "homepage": "https://github.com/Bum-Ble/gulu-ui#readme"
+  "homepage": "https://github.com/Bum-Ble/gulu-ui#readme",
+  "dependencies": {
+    "vue": "^3.2.32"
+  }
 }
