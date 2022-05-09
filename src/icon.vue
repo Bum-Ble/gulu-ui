@@ -4,7 +4,7 @@
   </svg>
 </template>
 <script>
-import './svg'
+import './assets/iconfont.js';
 export default {
   props:['name']
 }
