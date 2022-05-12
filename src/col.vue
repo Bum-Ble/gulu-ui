@@ -21,7 +21,7 @@ export default {
   $class-prefix: col-;
   @for $n from 1 through 24{
     &.#{$class-prefix}#{$n} {
-      width: ($n / 24) * 100%;
+      width: calc(($n / 24) * 100%);
     }
   }
 }
