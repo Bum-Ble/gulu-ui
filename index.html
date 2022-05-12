@@ -38,6 +38,8 @@
   </div>
   <div class="box">
     <g-input value="老六" error="姓名不能少于两个字" @change="handleChange"></g-input>
+    <g-input value="老六" v-model="message"></g-input>
+    <span>{{message}}</span>
   </div>
   <div class="box">
     <g-button icon="setting" :loading="loading1" @click="loading1 = !loading1">按钮</g-button>
