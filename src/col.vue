@@ -42,6 +42,11 @@ export default {
     colClass(){
       let { span, offset, ipad, narrowPc, pc, widePc } = this
       return [
+        ...this.createClass({span, offset}),
+        ...this.createClass(ipad, 'ipad-'),
+        ...this.createClass(narrowPc, 'narrow-pc-'),
+        ...this.createClass(pc, 'pc-'),
+        ...this.createClass(widePc, 'wide-pc-'),
         span && `col-${span}`,
         offset && `offset-${offset}`,
         ...(ipad ? [`col-ipad-${ipad.span}`] : []),
@@ -51,6 +56,19 @@ export default {
       ]
     }
   },
+  methods:{
+    createClass(obj, str=''){
+      if(!obj){ return [] }
+      let arr = []
+      if(obj.span){
+        arr.push(`col-${str}${obj.span}`)
+      }
+      if (obj.offset){
+        arr.push(`offset-${str}${obj.offset}`)
+      }
+      return arr
+    }
+  }
 }
 </script>
 <style lang="scss" scoped>
