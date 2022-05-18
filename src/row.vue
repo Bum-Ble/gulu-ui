@@ -41,10 +41,10 @@ export default {
   display: flex;
   flex-wrap: wrap-reverse;
   &.align-left{
-    justify-content: left;
+    justify-content: flex-start;
   }
   &.align-right{
-    justify-content: right;
+    justify-content: flex-end;
   }
   &.align-center{
     justify-content: center;
