@@ -5,6 +5,7 @@
 </template>
 <script>
 export default {
+  name: 'GuluRow',
   props:{
     gutter:{
       type:[String, Number]
