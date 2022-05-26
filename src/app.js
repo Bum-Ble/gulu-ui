@@ -35,8 +35,7 @@ new Vue({
   },
   methods:{
     showToast(){
-      console.log("1111")
-      this.$toast('I am message')
+      this.$toast('I am message',{showClose:false})
     }
   }
 })
