@@ -66,7 +66,9 @@ export default {
     },
     updateStyle(){
       this.$nextTick(() => {
-        this.$refs.line.style.height = `${this.$refs.wrapper.getBoundingClientRect().height}px`
+        if (this.showClose){
+          this.$refs.line.style.height = `${this.$refs.wrapper.getBoundingClientRect().height}px`
+        }
       })
     },
     close(){
