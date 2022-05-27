@@ -34,8 +34,14 @@ new Vue({
     message: 'hi'
   },
   methods:{
-    showToast(){
-      this.$toast('I am message',{showClose:false})
+    showToast1(){
+      this.$toast(`I am message--${Math.random()}`,{position:'top'})
+    },
+    showToast2(){
+      this.$toast(`I am message--${Math.random()}`,{position:'middle'})
+    },
+    showToast3(){
+      this.$toast(`I am message--${Math.random()}`,{position:'bottom'})
     }
   }
 })
