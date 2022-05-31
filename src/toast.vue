@@ -15,11 +15,7 @@ export default {
   name: 'GuluToast',
   props:{
     autoClose:{
-      type: Boolean,
-      default: true
-    },
-    autoDelay:{
-      type: Number,
+      type: Number, // 为0时,不自动关闭
       default: 2
     },
     showClose:{
@@ -60,10 +56,10 @@ export default {
   },
   methods:{
     execAutoClose(){
-      if (this.autoClose){
+      if (this.autoClose !== 0){
         setTimeout(() => {
           this.close()
-        }, this.autoDelay * 1000)
+        }, this.autoClose * 1000)
       }
     },
     updateStyle(){
