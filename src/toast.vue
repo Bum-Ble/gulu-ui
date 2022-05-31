@@ -64,7 +64,7 @@ export default {
     },
     updateStyle(){
       this.$nextTick(() => {
-        if (this.showClose){
+        if (this.showClose && this.$refs.line){
           this.$refs.line.style.height = `${this.$refs.toast.getBoundingClientRect().height}px`
         }
       })
