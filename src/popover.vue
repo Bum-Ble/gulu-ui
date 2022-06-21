@@ -24,10 +24,10 @@ export default {
       this.$refs.contentWrapper.style.top = top + window.scrollY + 'px'
     },
     onClickDocument(e){
-      // console.log(this.$refs.popover,'----------refs')
-      // console.log(e.target,"---------target")
-      if (this.$refs.popover === e.target || this.$refs.popover.contains(e.target)){
-        // console.log("222222")
+      if (this.$refs.popover && (this.$refs.popover === e.target || this.$refs.popover.contains(e.target))){
+        return
+      }
+      if (this.$refs.contentWrapper === e.target || this.$refs.contentWrapper.contains(e.target)){
         return
       }
       this.close()
