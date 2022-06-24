@@ -16,6 +16,10 @@ export default {
     title:{
       type:String,
       required: true
+    },
+    name:{
+      type: String,
+      required: true
     }
   },
   inject:['eventBus'],
@@ -25,24 +29,20 @@ export default {
     }
   },
   mounted() {
-    this.eventBus && this.eventBus.$on('update:selected', vm => {
-      if (vm !== this){
-        this.close()
-      }
+    this.eventBus && this.eventBus.$on('update:selected', names => {
+      console.log(names)
+      this.open = names.indexOf(this.name) >= 0;
     })
   },
   methods:{
     toggle(){
-      if (this.open === false){
-        this.open = true
-        this.eventBus && this.eventBus.$emit('update:selected',this)
-      }else{
-        this.close()
+      if (this.open) {
+        this.eventBus && this.eventBus.$emit('update:removeSelected', this.name)
+      } else {
+        this.eventBus && this.eventBus.$emit('update:addSelected', this.name)
       }
     },
-    close(){
-      this.open = false
-    }
+
   }
 }
 </script>
