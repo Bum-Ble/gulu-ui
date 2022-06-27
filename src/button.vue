@@ -38,23 +38,30 @@ export default {
   0%{ transform: rotate(0deg) }
   100%{ transform: rotate(360deg) }
 }
-
+$button-height: 32px;
+$font-size: 14px;
+$button-bg: #fff;
+$button-active-bg: #eee;
+$border-radius: 4px;
+$color:#999;
+$border-color:#999;
+$border-color-hover: #666;
 .g-button{
-  font-size: var(--font-size);
-  height: var(--button-height);
+  font-size: $font-size;
+  height: $button-height;
   padding: 0 1em;
-  border: 1px solid var(--border-color);
-  border-radius: var(--border-radius);
-  background: var(--button-bg);
+  border: 1px solid $border-color;
+  border-radius: $border-radius;
+  background: $button-bg;
   vertical-align: middle;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   &:hover{
-    border-color: var(--border-color-hover);
+    border-color: $border-color-hover;
   }
   &:active{
-    background-color: var(--button-active-bg);
+    background-color: $button-active-bg;
   }
   &:focus{
     outline: none;
