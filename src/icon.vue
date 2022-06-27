@@ -1,13 +1,14 @@
 <template>
   <svg class="icon" aria-hidden="true">
-    <use :xlink:href=`#i-${name}`></use>
+<!--    <use :xlink:href=`#i-${name}`></use>-->
+    <use :xlink:href='`#i-${name}`'></use>
   </svg>
 </template>
 <script>
 import './assets/iconfont.js';
 export default {
   name:'GuluIcon',
-  props:['name']
+  props:['name'],
 }
 </script>
 <style lang="scss" scoped>
