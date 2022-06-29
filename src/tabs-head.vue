@@ -13,9 +13,11 @@ export default {
   inject:['eventBus'],
   mounted() {
     this.eventBus.$on('update:selected', (item, vm) => {
+      let wrapperLeft = this.$el.getBoundingClientRect().left
       let {width, height, top, left} = vm.$el.getBoundingClientRect()
       this.$refs.line.style.width = `${width}px`
-      this.$refs.line.style.left = `${left}px`
+      this.$refs.line.style.left = `${left - wrapperLeft}px`
+
     })
   }
 }
@@ -42,6 +44,7 @@ $border-bottom: #ddd;
     bottom: 0;
     border-bottom: 2px solid $blue;
     transition: all 350ms;
+
   }
 }
 
