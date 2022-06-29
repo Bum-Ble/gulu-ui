@@ -2,13 +2,19 @@
   <transition name="slide">
     <div class="sider" v-if="visible">
       <slot></slot>
-      <button @click="visible=false">close</button>
+      <button v-if="hasCloseButton" @click="visible=false">close</button>
     </div>
   </transition>
 </template>
 <script>
 export default {
   name:'GuluSider',
+  props:{
+    hasCloseButton:{
+      type: Boolean,
+      default: false
+    }
+  },
   data(){
     return{
       visible: true
