@@ -25,6 +25,8 @@ module.exports = {
           '/components/button',
           '/components/input',
           '/components/row-col',
+          '/components/layout',
+          '/components/toast',
 
         ],
       }
