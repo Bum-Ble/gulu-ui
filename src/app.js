@@ -44,7 +44,8 @@ Vue.use(plugin)
 new Vue({
   el: '#app',
   data: {
-    selectedTab: ['1']
+    selectedTab: ['1'],
+    selected: 'sports'
   },
   methods:{
     showToast1(){

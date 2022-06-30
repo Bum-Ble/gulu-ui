@@ -27,6 +27,8 @@ module.exports = {
           '/components/row-col',
           '/components/layout',
           '/components/toast',
+          '/components/tabs',
+          '/components/popover',
 
         ],
       }
