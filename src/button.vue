@@ -46,17 +46,10 @@ export default {
   0%{ transform: rotate(0deg) }
   100%{ transform: rotate(360deg) }
 }
-$button-height: 32px;
-$font-size: 14px;
-$button-bg: #fff;
-$button-active-bg: #eee;
-$border-radius: 4px;
-$color:#999;
-$border-color:#999;
-$border-color-hover: #666;
+@import "var";
 .g-button{
   font-size: $font-size;
-  height: $button-height;
+  height: $height;
   padding: 0 1em;
   border: 1px solid $border-color;
   border-radius: $border-radius;

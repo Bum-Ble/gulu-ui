@@ -84,7 +84,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-$font-size: 14px;
+@import "var";
 $toast-min-height: 40px;
 $toast-bg: rgba(0,0,0,0.75);
 @keyframes fade-in {

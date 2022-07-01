@@ -45,7 +45,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-$blue: #47B5FF;
+@import "var";
 $disabled-color: grey;
 .tabs-item{
   padding: 0 1em;
