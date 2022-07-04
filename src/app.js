@@ -19,6 +19,8 @@ import TabsPane from "./tabs-pane";
 import Popover from "./popover";
 import Collapse from "./collapse";
 import CollapseItem from "./collapse-item";
+import Cascader from "./cascader";
+import CascaderItem from "./cascader-items";
 
 Vue.component('g-button',Button)
 Vue.component('g-icon',Icon)
@@ -39,26 +41,44 @@ Vue.component('g-tabs-pane', TabsPane)
 Vue.component('g-popover', Popover)
 Vue.component('g-collapse', Collapse)
 Vue.component('g-collapse-item', CollapseItem)
+Vue.component('g-cascader', Cascader)
+Vue.component('g-cascader-item', CascaderItem)
+
 Vue.use(plugin)
 
 new Vue({
   el: '#app',
   data: {
-    selectedTab: ['1'],
-    selected: 'sports'
+    source:[
+      {
+        name:'浙江',
+        children: [
+          {
+            name: '杭州',
+            children:[ { name: '上城' }, { name: '下城' }, { name: '江干' }, ]
+          },
+          {
+            name: '嘉兴',
+            children: [ { name: '南湖'}, { name: '秀洲'}, { name: '嘉善'}, ]
+          }
+        ]
+      },
+      {
+        name: '福建',
+        children: [
+          {
+            name: '福州',
+            children: [ { name: '鼓楼' }, { name: '台江' }, { name: '台山' }, ]
+          }
+        ]
+      },
+      {
+        name: '合肥',
+        children: [ { name: '瑶海' }, { name: '庐阳' } ]
+      }
+    ]
   },
   methods:{
-    showToast1(){
-      this.$toast(`I am message--${Math.random()}`,{position:'top',autoClose:0})
-    },
-    showToast2(){
-      this.$toast(`I am message--${Math.random()}`,{position:'middle'})
-    },
-    showToast3(){
-      this.$toast(`I am message--${Math.random()}`,{position:'bottom', autoClose:5})
-    },
-    yyy(){
-      console.log('yyyyy')
-    }
+
   }
 })
