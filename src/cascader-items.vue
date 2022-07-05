@@ -1,5 +1,5 @@
 <template>
-  <div class="cascaderItem" :style="{height: height}">
+  <div class="cascaderItem" :style="{height: height + 'px'}">
     <div class="left">
       <div class="label" v-for="item in items" @click="leftSelected = item">
         {{item.name}}
@@ -27,6 +27,7 @@ export default {
     },
     height:{
       type: String,
+      default: "100"
     }
   },
   computed:{
