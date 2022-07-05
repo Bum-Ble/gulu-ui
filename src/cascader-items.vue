@@ -53,6 +53,7 @@ export default {
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
+  font-size: $font-size;
   .left{
     height: 100%;
     padding: .3em 0;
@@ -68,7 +69,7 @@ export default {
 
     .icon{
       margin-left: .5em;
-      transform: scale(0.8);
+      transform: scale(0.6);
     }
   }
 }
