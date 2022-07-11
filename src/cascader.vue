@@ -2,7 +2,7 @@
   <div class="cascader">
     <div class="trigger" @click="popoverVisible = !popoverVisible"></div>
     <div class="popover-wrapper" v-if="popoverVisible">
-      <cascader-items class="popover" :items="source" :height="height"></cascader-items>
+      <cascader-items class="popover" :items="source" :height="height" :selected="selected" @update:selected="onUpdateSelected"></cascader-items>
     </div>
   </div>
 </template>
@@ -20,11 +20,22 @@ export default {
     },
     height:{
       type: String,
+    },
+    selected:{
+      type: Array,
+      default() {
+        return [];
+      }
     }
   },
   data(){
     return {
       popoverVisible: false
+    }
+  },
+  methods:{
+    onUpdateSelected(newSelected){
+      this.$emit('update:selected', newSelected)
     }
   }
 }

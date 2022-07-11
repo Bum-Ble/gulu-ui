@@ -1,7 +1,8 @@
 <template>
   <div>
     <g-button>你好</g-button>
-    <g-cascader :source="source" height="200"></g-cascader>
+    <p>{{selected}}</p>
+    <g-cascader :source="source" height="200" :selected.sync="selected"></g-cascader>
   </div>
 </template>
 
@@ -16,6 +17,7 @@ export default {
   },
   data() {
     return {
+      selected: [],
       source: [
         {
           name: '浙江',
