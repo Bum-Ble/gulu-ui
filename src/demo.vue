@@ -1,7 +1,10 @@
 <template>
   <div>
     <g-button>你好</g-button>
-    <g-cascader :source="source" height="200" :selected.sync="selected"></g-cascader>
+    <div style="padding: 20px;">
+      <g-cascader :source="source" height="200" :selected.sync="selected"></g-cascader>
+    </div>
+
   </div>
 </template>
 
