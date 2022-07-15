@@ -2,9 +2,8 @@
   <div>
     <g-button>你好</g-button>
     <div style="padding: 20px;">
-      <g-cascader :source="source" height="200" :selected.sync="selected"></g-cascader>
+      <g-cascader :source.sync="source" height="200" :selected.sync="selected" :load-data="loadData"></g-cascader>
     </div>
-
   </div>
 </template>
 
@@ -14,10 +13,13 @@ import gCascader from "@/cascader";
 import db from './db'
 
 function ajax(parentId = 0){
-  return db.filter(item => item.parent_id == parentId)
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      let result = db.filter(item => item.parent_id == parentId)
+      resolve(result)
+    }, 300)
+  })
 }
-
-console.log(ajax())
 
 export default {
   name: "demo",
@@ -27,7 +29,7 @@ export default {
   data() {
     return {
       selected: [],
-      source: ajax()
+      source: []
       //   [
       //   {
       //     name: '浙江',
@@ -57,6 +59,27 @@ export default {
       //   }
       // ]
     }
+  },
+  created() {
+    ajax(0).then(result => {
+      this.source = result
+      console.log(result)
+    })
+  },
+  methods:{
+    loadData(node, updateSource){
+      let {id} = node
+      ajax(id).then(result => {
+        updateSource(result)
+      })
+    },
+    // xxx(){
+    //   ajax(this.selected[0].id).then(result =>{
+    //     let lastLevelSelected = this.source.filter(item => item.id === this.selected[0].id)[0]
+    //     this.$set(lastLevelSelected, 'children', result)
+    //     console.log(lastLevelSelected)
+    //   })
+    // }
   }
 }
 </script>
