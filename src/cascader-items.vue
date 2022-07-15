@@ -2,14 +2,13 @@
   <div class="cascaderItem" :style="{height: height + 'px'}">
     <div class="left">
       <div class="label" v-for="item in items" @click="onClickLabel(item)">
-        {{item.name}}
-        <g-icon class="icon" v-if="item.children" name="right"></g-icon>
+        <span class="name"> {{item.name}} </span>
+        <g-icon class="icon" v-if="loadData ? !item.isLeaf : item.children" name="right"></g-icon>
       </div>
     </div>
     <div class="right" v-if="rightItems">
-      <gulu-cascader-items :items="rightItems" :height="height" :level="level + 1" :selected="selected" @update:selected="onUpdateSelected"></gulu-cascader-items>
+      <gulu-cascader-items :items="rightItems" :height="height" :level="level + 1" :selected="selected" @update:selected="onUpdateSelected" :load-data="loadData"></gulu-cascader-items>
     </div>
-
   </div>
 </template>
 
@@ -38,6 +37,9 @@ export default {
     level:{
       type: Number,
       default: 0
+    },
+    loadData:{
+      type: Function
     }
   },
   computed:{
@@ -71,7 +73,6 @@ export default {
   justify-content: flex-start;
   align-items: flex-start;
   font-size: $font-size;
-  padding-top: .3em;
   .left{
     height: 100%;
     overflow: auto;
@@ -84,9 +85,15 @@ export default {
     padding: .3em 1em;
     display: flex;
     align-items: center;
-
+    &:hover{
+      background-color: $button-active-bg;
+      cursor: pointer;
+    }
+    > .name{
+      margin-right: 1em;
+    }
     .icon{
-      margin-left: .5em;
+      margin-left: auto;
       transform: scale(0.6);
     }
   }
