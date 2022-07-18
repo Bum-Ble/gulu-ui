@@ -4,7 +4,9 @@
       {{result || '&nbsp;' }}
     </div>
     <div class="popover-wrapper" v-if="popoverVisible">
-      <cascader-items class="popover" :items="source" :height="height" :selected="selected" @update:selected="onUpdateSelected" :load-data="loadData"></cascader-items>
+      <cascader-items class="popover" :items="source" :height="height" :selected="selected"
+                      @update:selected="onUpdateSelected" :load-data="loadData" :load-item="loadItem">
+      </cascader-items>
     </div>
   </div>
 </template>
@@ -42,7 +44,8 @@ export default {
   },
   data(){
     return {
-      popoverVisible: false
+      popoverVisible: false,
+      loadItem:{}
     }
   },
   methods:{
@@ -105,14 +108,16 @@ export default {
       }
 
       let updateSource = (result) =>{
+        this.loadItem = {}
         let copy = JSON.parse(JSON.stringify(this.source))
         let toUpdate = complex(copy, lastItem.id)
         toUpdate.children = result
         this.$emit('update:source', copy)
       }
-      if(!lastItem.isLeaf){
-        this.loadData && this.loadData(lastItem, updateSource) // 回调：把别人传给我的函数调用一下
+      if(!lastItem.isLeaf && this.loadData){
+        this.loadData(lastItem, updateSource) // 回调：把别人传给我的函数调用一下
         // 调回调的时候传一个函数updateSource，这个函数理论应该被调用
+        this.loadItem = lastItem
       }
     }
   }
@@ -139,6 +144,7 @@ export default {
     top: 100%;
     left: 0;
     margin-top: 8px;
+    z-index: 1;
     @extend .box-shadow;
     background-color: #fff;
   }
