@@ -4,6 +4,10 @@
     <div style="padding: 20px;">
       <g-cascader :source.sync="source" height="200" :selected.sync="selected" :load-data="loadData"></g-cascader>
     </div>
+    <div style="padding: 20px;">
+      <g-cascader :source.sync="source" height="200" :selected.sync="selected" :load-data="loadData"></g-cascader>
+    </div>
+
   </div>
 </template>
 
