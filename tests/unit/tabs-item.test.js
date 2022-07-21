@@ -1,12 +1,12 @@
-import Toast from "../src/toast";
+import Toast from "@/toast";
 
 const expect = chai.expect;
 import Vue from 'vue'
-import Tabs from '../src/tabs'
-import TabsHead from "../src/tabs-head";
-import TabsItem from "../src/tabs-item";
-import TabsBody from "../src/tabs-body";
-import TabsPane from "../src/tabs-pane";
+import Tabs from '@/tabs'
+import TabsHead from "@/tabs-head";
+import TabsItem from "@/tabs-item";
+import TabsBody from "@/tabs-body";
+import TabsPane from "@/tabs-pane";
 import sinon from "sinon/pkg/sinon-esm";
 
 Vue.component('g-tabs', Tabs)
