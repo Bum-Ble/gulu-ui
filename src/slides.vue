@@ -42,21 +42,19 @@ export default {
     this.childrenLength = this.$children.length
   },
   updated() {
-    console.log(this.lastSelectedIndex)
-    console.log(this.selectedIndex)
     this.updateChildren()
   },
   methods:{
     playAutomatically(){
-      let index = this.names.indexOf(this.getSelected())
       let run = () => {
+        let index = this.names.indexOf(this.getSelected())
         let newIndex = index - 1
         if (newIndex === -1) { newIndex = this.names.length - 1 }
         if (newIndex === this.names.length){ newIndex = 0 }
-        this.$emit('update:selected',this.names[newIndex])
-        // 用 setTimeout 模拟 setInterval
-        // setTimeout(run, 3000)
+        this.select(newIndex)
+        setTimeout(run, 3000)
       }
+      // 用 setTimeout 模拟 setInterval
       setTimeout(run, 3000)
     },
     select(index){
@@ -83,7 +81,6 @@ export default {
 
 <style scoped lang="scss">
 .g-slides{
-  border: 1px solid black;
   &-window{
     overflow: hidden;
   }
