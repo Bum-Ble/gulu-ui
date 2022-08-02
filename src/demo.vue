@@ -25,7 +25,7 @@ export default {
   },
   data() {
     return {
-      selected: '第三张'
+      selected: '第一张'
     }
   },
   methods:{
