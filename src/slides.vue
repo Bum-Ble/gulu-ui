@@ -1,5 +1,5 @@
 <template>
-  <div class="g-slides">
+  <div class="g-slides" @mouseenter="onMouseEnter()" @mouseleave="onMouseLeave()">
     <div class="g-slides-window">
       <div class="g-slides-wrapper">
         <slot></slot>
@@ -32,7 +32,8 @@ export default {
   data(){
     return {
       childrenLength: 0,
-      lastSelectedIndex: undefined
+      lastSelectedIndex: undefined,
+      timerId: undefined
     }
   },
 
@@ -45,17 +46,28 @@ export default {
     this.updateChildren()
   },
   methods:{
+    onMouseEnter(){
+      this.pause()
+    },
+    onMouseLeave(){
+      this.playAutomatically()
+    },
     playAutomatically(){
+      if (this.timerId) return
       let run = () => {
         let index = this.names.indexOf(this.getSelected())
-        let newIndex = index - 1
-        if (newIndex === -1) { newIndex = this.names.length - 1 }
+        let newIndex = index + 1
+        if (newIndex === -1) { newIndex = this.names.length + 1 }
         if (newIndex === this.names.length){ newIndex = 0 }
         this.select(newIndex)
-        setTimeout(run, 3000)
+        this.timerId = setTimeout(run, 3000)
       }
       // 用 setTimeout 模拟 setInterval
-      setTimeout(run, 3000)
+      this.timerId = setTimeout(run, 3000)
+    },
+    pause(){
+      window.clearTimeout(this.timerId)
+      this.timerId = undefined
     },
     select(index){
       this.lastSelectedIndex = this.selectedIndex
@@ -68,7 +80,16 @@ export default {
     updateChildren(){
       let selected = this.getSelected()
       this.$children.forEach(vm => {
-        vm.reverse = this.selectedIndex > this.lastSelectedIndex ? false : true
+        let reverse = this.selectedIndex > this.lastSelectedIndex ? false : true
+        if (this.timerId){
+          if (this.lastSelectedIndex === this.$children.length -1 && this.selectedIndex === 0){
+            reverse = false
+          }
+          if (this.lastSelectedIndex === 0 && this.selectedIndex === this.$children.length -1){
+            reverse = true
+          }
+        }
+        vm.reverse = reverse
         this.$nextTick(() => {
           vm.selected = selected
         })
