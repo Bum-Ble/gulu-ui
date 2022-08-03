@@ -1,5 +1,6 @@
 <template>
-  <div class="g-slides" @mouseenter="onMouseEnter()" @mouseleave="onMouseLeave()">
+  <div class="g-slides" @mouseenter="onMouseEnter()" @mouseleave="onMouseLeave()"
+        @touchstart="onTouchStart" @touchmove="onTouchMove" @touchend="onTouchEnd">
     <div class="g-slides-window">
       <div class="g-slides-wrapper">
         <slot></slot>
@@ -33,7 +34,8 @@ export default {
     return {
       childrenLength: 0,
       lastSelectedIndex: undefined,
-      timerId: undefined
+      timerId: undefined,
+      startTouch: undefined
     }
   },
 
@@ -52,13 +54,39 @@ export default {
     onMouseLeave(){
       this.playAutomatically()
     },
+    onTouchStart(e){
+      this.pause()
+      if (e.touches.length > 1) return
+      this.startTouch = e.touches[0]
+    },
+    onTouchMove(){},
+    onTouchEnd(e){
+      let endTouch = e.changedTouches[0]
+      let {clientX: x1, clientY: y1} = this.startTouch
+      let {clientX: x2, clientY: y2} = endTouch
+
+      // 两点之间距离
+      let distance = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1,2))
+      // 垂直于x轴的距离
+      let deltaY = Math.abs(y2 - y1)
+      // 角度小于30度时，默认用户不是上下滚动页面，而是左右切换轮播图。（角度为30度时，distance 是 deltaY 的两倍）。
+      let rate = distance / deltaY
+      if (rate > 2){
+        if (x2 > x1){
+          this.select(this.selectedIndex - 1)
+        }else{
+          this.select(this.selectedIndex + 1)
+        }
+      }
+      this.$nextTick(() => {
+        this.playAutomatically()
+      })
+    },
     playAutomatically(){
       if (this.timerId) return
       let run = () => {
         let index = this.names.indexOf(this.getSelected())
         let newIndex = index + 1
-        if (newIndex === -1) { newIndex = this.names.length - 1 }
-        if (newIndex === this.names.length){ newIndex = 0 }
         this.select(newIndex)
         this.timerId = setTimeout(run, 3000)
       }
@@ -69,9 +97,11 @@ export default {
       window.clearTimeout(this.timerId)
       this.timerId = undefined
     },
-    select(index){
+    select(newIndex){
       this.lastSelectedIndex = this.selectedIndex
-      this.$emit('update:selected', this.names[index])
+      if (newIndex === -1) { newIndex = this.names.length - 1 }
+      if (newIndex === this.names.length){ newIndex = 0 }
+      this.$emit('update:selected', this.names[newIndex])
     },
     getSelected(){
       let first = this.$children[0]
